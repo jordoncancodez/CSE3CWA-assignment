@@ -43,10 +43,29 @@
   border-radius: 2px;
   font-weight: 600;
 }
-.tabnav a.active { 
-  background: currentColor; 
-  color: var(--tab-active-fg, #fff); 
+./* Default active link style (applies to all themes unless overridden) */
+.tabnav a.active {
+  font-weight: bold;
+  border-bottom: 3px solid currentColor;
+  padding-bottom: 4px;
 }
+
+/* Light theme specific active style */
+[data-theme="light"] .tabnav a.active {
+  color: #ffffff; /* White text for visibility */
+  background-color: #007acc; /* Light mode highlight color (blue) */
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* Optional: Dark theme can keep its own color if needed */
+[data-theme="dark"] .tabnav a.active {
+  color: #fff;
+  background-color: #333;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
 .tabnav .spacer { flex: 1; }
 
 /* Hamburger Button */
