@@ -43,7 +43,7 @@
   border-radius: 2px;
   font-weight: 600;
 }
-./* Default active link style (applies to all themes unless overridden) */
+/* Default active link style (applies to all themes unless overridden) */
 .tabnav a.active {
   font-weight: bold;
   border-bottom: 3px solid currentColor;
