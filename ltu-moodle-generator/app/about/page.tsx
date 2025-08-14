@@ -4,8 +4,8 @@ export default function About() {
   return (
     <section className="card">
       <h1>About</h1>
-      <p><strong>Name:</strong> Your Name</p>
-      <p><strong>Student Number:</strong> s1234567</p>
+      <p><strong>Name:</strong> Jordon Turiello</p>
+      <p><strong>Student Number:</strong> 21489152 </p>
       <h2>How to use this website</h2>
       <ol>
         <li>Go to <em>Tabs Builder</em>.</li>

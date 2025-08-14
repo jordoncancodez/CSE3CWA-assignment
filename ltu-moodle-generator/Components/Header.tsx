@@ -10,7 +10,6 @@ export default function Header() {
   const [theme, setTheme] = useState("light");
   const [activeTab, setActiveTab] = useState(pathname);
 
-  // Load theme & last active tab from cookies on mount
   useEffect(() => {
     const savedTheme = document.cookie
       .split("; ")
@@ -31,7 +30,6 @@ export default function Header() {
     }
   }, []);
 
-  // Save theme to cookies
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     document.cookie = `theme=${theme}; path=/; max-age=31536000`;
@@ -45,58 +43,21 @@ export default function Header() {
 
   return (
     <header className="header">
-      {/* Topbar */}
       <div className="topbar">
         <div className="student">21489152</div>
         <div className="title">CSE3CWA Assignment 1</div>
       </div>
 
-      {/* Nav */}
       <nav className={`tabnav ${menuOpen ? "open" : ""}`}>
-        <Link
-          href="/"
-          className={activeTab === "/" ? "active" : ""}
-          onClick={() => handleTabClick("/")}
-        >
-          Home
-        </Link>
-        <Link
-          href="/court-room"
-          className={activeTab === "/court-room" ? "active" : ""}
-          onClick={() => handleTabClick("/court-room")}
-        >
-          Court Room
-        </Link>
-        <Link
-          href="/coding-races"
-          className={activeTab === "/coding-races" ? "active" : ""}
-          onClick={() => handleTabClick("/coding-races")}
-        >
-          Coding Races
-        </Link>
-        <Link
-          href="/escape-room"
-          className={activeTab === "/escape-room" ? "active" : ""}
-          onClick={() => handleTabClick("/escape-room")}
-        >
-          Escape Room
-        </Link>
-        <Link
-          href="/tabs-builder"
-          className={activeTab === "/tabs-builder" ? "active" : ""}
-          onClick={() => handleTabClick("/tabs-builder")}
-        >
-          Tabs
-        </Link>
+        <Link href="/" className={activeTab === "/" ? "active" : ""} onClick={() => handleTabClick("/")}>Home</Link>
+        <Link href="/court-room" className={activeTab === "/court-room" ? "active" : ""} onClick={() => handleTabClick("/court-room")}>Court Room</Link>
+        <Link href="/coding-races" className={activeTab === "/coding-races" ? "active" : ""} onClick={() => handleTabClick("/coding-races")}>Coding Races</Link>
+        <Link href="/escape-room" className={activeTab === "/escape-room" ? "active" : ""} onClick={() => handleTabClick("/escape-room")}>Escape Room</Link>
+        <Link href="/tabs-builder" className={activeTab === "/tabs-builder" ? "active" : ""} onClick={() => handleTabClick("/tabs-builder")}>Tabs</Link>
+        <Link href="/about" className={activeTab === "/about" ? "active" : ""} onClick={() => handleTabClick("/about")}>About</Link>
 
         <div className="spacer" />
-
-        {/* Theme Selector */}
-        <select
-          value={theme}
-          onChange={(e) => setTheme(e.target.value)}
-          className="theme-select"
-        >
+        <select value={theme} onChange={(e) => setTheme(e.target.value)} className="theme-select">
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="blue">Blue</option>
@@ -104,36 +65,21 @@ export default function Header() {
           <option value="purple">Purple</option>
         </select>
 
-        {/* Burger Icon */}
-        <button
-          className="hamburger"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+        <button className="hamburger" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
           <span className="line l1" />
           <span className="line l2" />
           <span className="line l3" />
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div className="mobileMenu">
-          <Link href="/" onClick={() => handleTabClick("/")}>
-            Home
-          </Link>
-          <Link href="/court-room" onClick={() => handleTabClick("/court-room")}>
-            Court Room
-          </Link>
-          <Link href="/coding-races" onClick={() => handleTabClick("/coding-races")}>
-            Coding Races
-          </Link>
-          <Link href="/escape-room" onClick={() => handleTabClick("/escape-room")}>
-            Escape Room
-          </Link>
-          <Link href="/tabs-builder" onClick={() => handleTabClick("/tabs-builder")}>
-            Tabs
-          </Link>
+          <Link href="/" onClick={() => handleTabClick("/")}>Home</Link>
+          <Link href="/court-room" onClick={() => handleTabClick("/court-room")}>Court Room</Link>
+          <Link href="/coding-races" onClick={() => handleTabClick("/coding-races")}>Coding Races</Link>
+          <Link href="/escape-room" onClick={() => handleTabClick("/escape-room")}>Escape Room</Link>
+          <Link href="/tabs-builder" onClick={() => handleTabClick("/tabs-builder")}>Tabs</Link>
+          <Link href="/about" onClick={() => handleTabClick("/about")}>About</Link>
         </div>
       )}
     </header>
