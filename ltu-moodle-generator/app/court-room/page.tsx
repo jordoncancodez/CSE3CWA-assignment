@@ -1,8 +1,15 @@
-export default function Page() {
+export default function CourtRoomPage() {
     return (
-      <section className="card">
-        <h1>Coming soon</h1>
-        <p>Placeholder page.</p>
+      <section
+        className="card"
+        style={{
+          border: "2px solid black",
+          padding: "1rem",
+          textAlign: "center",
+          fontWeight: "bold",
+        }}
+      >
+        Coming Soon
       </section>
     );
   }

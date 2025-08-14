@@ -13,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning data-theme="light">
       <body>
+
         <Header />
         <main id="main" className="container main">{children}</main>
         <Footer />

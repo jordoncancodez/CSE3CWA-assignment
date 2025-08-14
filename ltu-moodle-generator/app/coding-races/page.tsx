@@ -1,6 +1,15 @@
-import React from "react";
-
-export default function Page() {
-    return <section className="card"><h1>Coming soon</h1><p>Placeholder page.</p></section>;
-  }
-  
+export default function CodingRacePage() {
+  return (
+    <section
+      className="card"
+      style={{
+        border: "2px solid black",
+        padding: "1rem",
+        textAlign: "center",
+        fontWeight: "bold",
+      }}
+    >
+      Coming Soon
+    </section>
+  );
+}

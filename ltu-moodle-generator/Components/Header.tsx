@@ -1,56 +1,101 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState("light");
+  const [activeTab, setActiveTab] = useState(pathname);
 
+  // Load theme & last active tab from cookies on mount
+  useEffect(() => {
+    const savedTheme = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("theme="))
+      ?.split("=")[1];
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+
+    const savedTab = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("activeTab="))
+      ?.split("=")[1];
+    if (savedTab && savedTab !== pathname) {
+      setActiveTab(savedTab);
+      router.push(savedTab);
+    }
+  }, []);
+
+  // Save theme to cookies
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    document.cookie = `theme=${theme}; path=/; max-age=31536000`;
   }, [theme]);
+
+  const handleTabClick = (href: string) => {
+    setActiveTab(href);
+    document.cookie = `activeTab=${href}; path=/; max-age=31536000`;
+    setMenuOpen(false);
+  };
 
   return (
     <header className="header">
+      {/* Topbar */}
       <div className="topbar">
+        <div className="student">21489152</div>
         <div className="title">CSE3CWA Assignment 1</div>
-        <div className="student">12345678</div>
       </div>
 
-      <nav className="tabnav">
-        {/* Desktop permanent menu */}
-        <Link href="/" className={pathname === "/" ? "active" : ""}>
+      {/* Nav */}
+      <nav className={`tabnav ${menuOpen ? "open" : ""}`}>
+        <Link
+          href="/"
+          className={activeTab === "/" ? "active" : ""}
+          onClick={() => handleTabClick("/")}
+        >
           Home
         </Link>
-        <Link href="/tabs-builder" className={pathname === "/tabs-builder" ? "active" : ""}>
-        Tabs Builder
-        </Link>
-        <Link href="/court-room" className={pathname === "/court-room" ? "active" : ""}>
+        <Link
+          href="/court-room"
+          className={activeTab === "/court-room" ? "active" : ""}
+          onClick={() => handleTabClick("/court-room")}
+        >
           Court Room
         </Link>
-        <Link href="/coding-race" className={pathname === "/coding-race" ? "active" : ""}>
-          Coding Race
+        <Link
+          href="/coding-races"
+          className={activeTab === "/coding-races" ? "active" : ""}
+          onClick={() => handleTabClick("/coding-races")}
+        >
+          Coding Races
         </Link>
-        <Link href="/escape-room" className={pathname === "/escape-room" ? "active" : ""}>
+        <Link
+          href="/escape-room"
+          className={activeTab === "/escape-room" ? "active" : ""}
+          onClick={() => handleTabClick("/escape-room")}
+        >
           Escape Room
+        </Link>
+        <Link
+          href="/tabs-builder"
+          className={activeTab === "/tabs-builder" ? "active" : ""}
+          onClick={() => handleTabClick("/tabs-builder")}
+        >
+          Tabs
         </Link>
 
         <div className="spacer" />
 
-        {/* Theme dropdown */}
+        {/* Theme Selector */}
         <select
           value={theme}
           onChange={(e) => setTheme(e.target.value)}
-          style={{
-            padding: "0.25rem 0.5rem",
-            border: "2px solid currentColor",
-            borderRadius: "4px",
-            background: "var(--bg-color)",
-            color: "var(--text-color)",
-            fontWeight: "600",
-          }}
+          className="theme-select"
         >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
@@ -59,7 +104,7 @@ export default function Header() {
           <option value="purple">Purple</option>
         </select>
 
-        {/* Burger button */}
+        {/* Burger Icon */}
         <button
           className="hamburger"
           aria-expanded={menuOpen}
@@ -71,14 +116,24 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="mobileMenu">
-          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/tabs-builder" onClick={() => setMenuOpen(false)}>Tabs Builder</Link>
-          <Link href="/court-room" onClick={() => setMenuOpen(false)}>Court Room</Link>
-          <Link href="/coding-race" onClick={() => setMenuOpen(false)}>Coding Race</Link>
-          <Link href="/escape-room" onClick={() => setMenuOpen(false)}>Escape Room</Link>
+          <Link href="/" onClick={() => handleTabClick("/")}>
+            Home
+          </Link>
+          <Link href="/court-room" onClick={() => handleTabClick("/court-room")}>
+            Court Room
+          </Link>
+          <Link href="/coding-races" onClick={() => handleTabClick("/coding-races")}>
+            Coding Races
+          </Link>
+          <Link href="/escape-room" onClick={() => handleTabClick("/escape-room")}>
+            Escape Room
+          </Link>
+          <Link href="/tabs-builder" onClick={() => handleTabClick("/tabs-builder")}>
+            Tabs
+          </Link>
         </div>
       )}
     </header>

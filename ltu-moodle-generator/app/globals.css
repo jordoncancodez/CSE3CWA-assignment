@@ -1,132 +1,107 @@
-/* ---- LAYOUT CHROME ---- */
+/* Container */
 .container { 
   max-width: 1100px; 
   margin: 0 auto; 
   padding: 0 1rem; 
 }
-.header { 
-  border-bottom: 2px solid currentColor; 
-}
+.header { border-bottom: 2px solid currentColor; }
 
-/* Top strip: Title center, Student No. right */
+/* Top Bar */
 .topbar {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
   align-items: center;
-  padding: .5rem 0 .25rem;
-}
-.topbar .title {
-  justify-self: center;
-  font-weight: 700;
-  font-size: 1.4rem; /* larger title */
-}
-.topbar .student {
-  justify-self: end;
-  font-weight: 700;
-  font-size: 1.2rem; /* larger student number */
+  justify-content: space-between; /* space out left and right */
+  position: relative;
+  padding: 0.5rem 0 0.25rem;
 }
 
-/* Bold bordered tab menu - permanent tabs */
+.topbar .student {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.topbar .title {
+  position: absolute; /* allows perfect centering */
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+/* Navigation Tabs */
 .tabnav {
   display: flex; 
   flex-wrap: wrap; 
-  gap: .5rem; /* increased gap */
+  gap: .5rem;
   align-items: center;
   padding: .35rem 0 .5rem; 
   border-top: 2px solid currentColor;
 }
-
 .tabnav a {
   border: 2px solid currentColor; 
-  padding: .25rem .8rem; /* more horizontal padding */
+  padding: .25rem .8rem;
   border-radius: 2px;
   font-weight: 600;
-  display: inline-block;
 }
-
 .tabnav a.active { 
   background: currentColor; 
   color: var(--tab-active-fg, #fff); 
 }
 .tabnav .spacer { flex: 1; }
-.tabnav .controls { 
-  display: flex; 
-  gap: .5rem; 
-  align-items: center; 
+
+/* Hamburger Button */
+.hamburger {
+  display: inline-block !important;
+  width: 30px;
+  height: 22px;
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.hamburger .line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: currentColor;
+  transition: 0.25s;
+}
+.hamburger .l1 { top: 0; }
+.hamburger .l2 { top: 9px; }
+.hamburger .l3 { top: 18px; }
+.hamburger[aria-expanded="true"] .l1 { top: 9px; transform: rotate(45deg); }
+.hamburger[aria-expanded="true"] .l2 { opacity: 0; }
+.hamburger[aria-expanded="true"] .l3 { top: 9px; transform: rotate(-45deg); }
+
+html[data-theme="dark"] .hamburger .line {
+  background: white;
 }
 
-/* Hamburger transforms */
-.hamburger { 
-  width: 30px; 
-  height: 22px; 
-  position: relative; 
-  border:none; 
-  background:none; 
-}
-.hamburger .line { 
-  position:absolute; 
-  left:0; 
-  right:0; 
-  height:3px; 
-  background: currentColor; 
-  transition:.25s; 
-}
-.hamburger .l1 { top:0; } 
-.hamburger .l2 { top:9px; } 
-.hamburger .l3 { top:18px; }
-.hamburger[aria-expanded="true"] .l1 { top:9px; transform:rotate(45deg); }
-.hamburger[aria-expanded="true"] .l2 { opacity:0; }
-.hamburger[aria-expanded="true"] .l3 { top:9px; transform:rotate(-45deg); }
 
-/* Mobile menu under tab row */
-.mobileMenu { 
-  display:none; 
-  padding:.5rem 0; 
-}
+/* Mobile Menu */
+.mobileMenu { padding: .5rem 0; }
 .mobileMenu a { 
-  display:block; 
-  margin:.25rem 0; 
-  border:2px solid currentColor; 
-  padding:.35rem .6rem; 
-  border-radius:2px; 
+  display: block; 
+  margin: .25rem 0; 
+  border: 2px solid currentColor; 
+  padding: .35rem .6rem; 
+  border-radius: 2px; 
+}
+
+/* Desktop vs Mobile */
+@media (min-width: 860px) {
+  .hamburger { display: none; }
 }
 
 @media (max-width: 860px) {
-  /* Remove the hide rule so links stay visible */
-  /* .tabnav a { display: none; } */
-  .mobileMenu { display: block; }
+  .tabnav a { display: none; } /* Hide desktop links */
 }
 
+/* Main Body */
+.main { min-height: 70vh; margin-top: 1rem; }
 
-/* Page body / cards */
-.main { 
-  min-height: 70vh; 
-  margin-top: 1rem; /* gap between header and content */
-}
-section.card { 
-  border:2px solid currentColor; 
-  border-radius: 4px; 
-  padding: 1rem; 
-}
-
-/* TabsBuilder layout boxes like the sketch */
-.tb-grid { 
-  display:grid; 
-  grid-template-columns: 220px 1fr 340px; 
-  gap: 1rem; 
-}
-.tb-box { 
-  border:2px solid currentColor; 
-  border-radius: 4px; 
-  padding:.5rem; 
-}
-.tb-list button { 
-  display:block; 
-  width:100%; 
-  text-align:left; 
-  padding:.35rem .5rem; 
-}
-
+/* THEME: Dark */
 /* ---- THEME: Dark mode ---- */
 html[data-theme="dark"] {
   background-color: #121212;
@@ -137,7 +112,7 @@ html[data-theme="dark"] body {
   color: #ffffff;
 }
 html[data-theme="dark"] a {
-  color: #90caf9;
+  color: #90caf9; /* Light blue for links */
 }
 html[data-theme="dark"] section.card {
   background-color: #1e1e1e;
@@ -147,51 +122,96 @@ html[data-theme="dark"] .tabnav a {
   border-color: #ffffff;
 }
 html[data-theme="dark"] .tabnav a.active {
-  background-color: #ffffff;
-  color: #121212;
+  background-color: #90caf9; /* Light blue background for active tab */
+  color: #121212; /* Dark text inside active tab */
 }
 html[data-theme="dark"] .hamburger .line {
   background: white;
 }
 
-/* ---- THEME: Blue ---- */
-html[data-theme="blue"] {
-  background-color: #e3f2fd;
-  color: #0d47a1;
-}
-html[data-theme="blue"] section.card {
-  background-color: #bbdefb;
-  border-color: #0d47a1;
-}
-html[data-theme="blue"] .tabnav a.active {
-  background-color: #0d47a1;
-  color: white;
+
+/* THEME: Blue */
+html[data-theme="blue"] { background: #e3f2fd; color: #0d47a1; }
+html[data-theme="blue"] .tabnav a.active { background: #0d47a1; color: white; }
+
+/* THEME: Green */
+html[data-theme="green"] { background: #e8f5e9; color: #1b5e20; }
+html[data-theme="green"] .tabnav a.active { background: #1b5e20; color: white; }
+
+/* THEME: Purple */
+html[data-theme="purple"] { background: #f3e5f5; color: #4a148c; }
+html[data-theme="purple"] .tabnav a.active { background: #4a148c; color: white; }
+
+.tb-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-/* ---- THEME: Green ---- */
-html[data-theme="green"] {
-  background-color: #e8f5e9;
-  color: #1b5e20;
-}
-html[data-theme="green"] section.card {
-  background-color: #c8e6c9;
-  border-color: #1b5e20;
-}
-html[data-theme="green"] .tabnav a.active {
-  background-color: #1b5e20;
-  color: white;
+.tb-box {
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 0.5rem;
 }
 
-/* ---- THEME: Purple ---- */
-html[data-theme="purple"] {
-  background-color: #f3e5f5;
-  color: #4a148c;
+.tb-list button {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
 }
-html[data-theme="purple"] section.card {
-  background-color: #e1bee7;
-  border-color: #4a148c;
+
+.tb-list button.active {
+  border: 1px solid black;
+  font-weight: bold;
 }
-html[data-theme="purple"] .tabnav a.active {
-  background-color: #4a148c;
-  color: white;
+
+.tb-list button:hover {
+  background-color: #f0f0f0;
+}
+footer {
+  border-top: 2px solid black; 
+  padding-top: 0.5rem;       
+  margin-top: 5rem;           
+}
+
+/* Base font size */
+body {
+  font-size: 18px; /* larger for accessibility */
+  line-height: 1.6;
+}
+
+/* Headings */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Navigation links */
+.tabnav a {
+  font-size: 1rem; /* 16px equivalent */
+}
+
+/* Form elements */
+select, button {
+  font-size: 1rem;
+}
+
+/* Increase mobile font size too */
+@media (max-width: 600px) {
+  body {
+    font-size: 17px;
+  }
+  .tabnav a {
+    font-size: 0.95rem;
+  }
 }
