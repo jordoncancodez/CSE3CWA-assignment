@@ -1,82 +1,86 @@
 "use client";
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Hamburger from "./Hamburger";
-import ThemeToggle from "./ThemeToggle";
-import { getCookie, setCookie } from "@/lib/menuCookie";
-
-// Replace this with YOUR real student number once
-const STUDENT_NUMBER = "s1234567";
-const STUDENT_NAME = "Your Name";
-
-const LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/tabs", label: "Tabs Builder" },
-  { href: "/about", label: "About" },
-  { href: "/escape-room", label: "Escape Room" },
-  { href: "/coding-races", label: "Coding Races" },
-  { href: "/court-room", label: "Court Room" },
-];
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("light");
 
-  // Remember last visited menu tab via cookie
   useEffect(() => {
-    const last = getCookie("last_menu");
-    if (!last) setCookie("last_menu", pathname);
-    else if (pathname === "/" && last && last !== "/") {
-      // Optional: redirect to last visited section on first hit
-      // Comment out next line if you don't want auto-redirect:
-      // router.replace(last);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => { setCookie("last_menu", pathname); }, [pathname]);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   return (
     <header className="header">
-      <div className="container">
-        <div className="spread">
-          <div className="brand" aria-label={`${STUDENT_NAME} ${STUDENT_NUMBER}`}>
-            <span className="student">{STUDENT_NUMBER}</span>
-            <Link href="/"><strong>LTU HTML Generator</strong></Link>
-          </div>
-          <nav className="nav desktopOnly" aria-label="Primary">
-            {LINKS.map(l => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={pathname === l.href ? "active" : ""}
-              >
-                {l.label}
-              </Link>
-            ))}
-            <ThemeToggle />
-          </nav>
-          <div className="desktopOnly" aria-hidden="true" />
-          <div className="mobileOnly">
-            <Hamburger onToggle={setMobileOpen} />
-          </div>
-        </div>
-
-        <div className="mobileMenu" style={{display: mobileOpen ? "block" : "none"}}>
-          <nav aria-label="Mobile">
-            {LINKS.map(l => (
-              <Link key={l.href} href={l.href} onClick={() => setMobileOpen(false)} className={pathname === l.href ? "active" : ""}>
-                {l.label}
-              </Link>
-            ))}
-            <div style={{ marginTop: ".5rem" }}><ThemeToggle /></div>
-          </nav>
-        </div>
+      <div className="topbar">
+        <div className="title">CSE3CWA Assignment 1</div>
+        <div className="student">12345678</div>
       </div>
+
+      <nav className="tabnav">
+        {/* Desktop permanent menu */}
+        <Link href="/" className={pathname === "/" ? "active" : ""}>
+          Home
+        </Link>
+        <Link href="/tabs-builder" className={pathname === "/tabs-builder" ? "active" : ""}>
+        Tabs Builder
+        </Link>
+        <Link href="/court-room" className={pathname === "/court-room" ? "active" : ""}>
+          Court Room
+        </Link>
+        <Link href="/coding-race" className={pathname === "/coding-race" ? "active" : ""}>
+          Coding Race
+        </Link>
+        <Link href="/escape-room" className={pathname === "/escape-room" ? "active" : ""}>
+          Escape Room
+        </Link>
+
+        <div className="spacer" />
+
+        {/* Theme dropdown */}
+        <select
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+          style={{
+            padding: "0.25rem 0.5rem",
+            border: "2px solid currentColor",
+            borderRadius: "4px",
+            background: "var(--bg-color)",
+            color: "var(--text-color)",
+            fontWeight: "600",
+          }}
+        >
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="purple">Purple</option>
+        </select>
+
+        {/* Burger button */}
+        <button
+          className="hamburger"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="line l1" />
+          <span className="line l2" />
+          <span className="line l3" />
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="mobileMenu">
+          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/tabs-builder" onClick={() => setMenuOpen(false)}>Tabs Builder</Link>
+          <Link href="/court-room" onClick={() => setMenuOpen(false)}>Court Room</Link>
+          <Link href="/coding-race" onClick={() => setMenuOpen(false)}>Coding Race</Link>
+          <Link href="/escape-room" onClick={() => setMenuOpen(false)}>Escape Room</Link>
+        </div>
+      )}
     </header>
   );
 }

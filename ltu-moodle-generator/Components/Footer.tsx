@@ -2,8 +2,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-const STUDENT_NUMBER = "s1234567";
-const STUDENT_NAME = "Your Name";
+// student details displayed at the bottom left
+const STUDENT_NUMBER = "21489152";
+const STUDENT_NAME = "Jordon Turiello";
 
 export default function Footer() {
   const [dateStr, setDateStr] = useState("");
