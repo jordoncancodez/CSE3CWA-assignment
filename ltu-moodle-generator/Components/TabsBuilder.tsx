@@ -19,7 +19,7 @@ export default function TabsBuilder() {
   const [generated, setGenerated] = useState<string>("");
   const [howToOpen, setHowToOpen] = useState(false);
 
-  // Load saved tabs
+  //  saved tabs
   useEffect(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -33,7 +33,7 @@ export default function TabsBuilder() {
     }
   }, []);
 
-  // Persist tabs
+  // permannent tabs
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tabs));
   }, [tabs]);
@@ -158,7 +158,7 @@ export default function TabsBuilder() {
       <h1 id="builder-h1" style={{ marginTop: 0 }}>Tabs Builder</h1>
 
       <div className="tb-grid">
-        {/* Left: Tabs Headers */}
+        {/*  Headers */}
         <div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
             <strong>Tabs Headers:</strong>
@@ -203,7 +203,7 @@ export default function TabsBuilder() {
           </div>
         </div>
 
-        {/* Middle: Tabs Content editor */}
+        {/* content editor */}
         <div>
           <strong>Tabs Content</strong>
           <div className="tb-box">
@@ -232,7 +232,7 @@ export default function TabsBuilder() {
           </div>
         </div>
 
-        {/* Right: Output */}
+        {/* Output */}
         <div>
           <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 6 }}>
             <strong>Output</strong>
@@ -247,7 +247,6 @@ export default function TabsBuilder() {
         </div>
       </div>
 
-      {/* How To Use Accordion */}
       <div className="tb-box" style={{ marginTop: "2rem" }}>
         <button
           onClick={() => setHowToOpen(!howToOpen)}

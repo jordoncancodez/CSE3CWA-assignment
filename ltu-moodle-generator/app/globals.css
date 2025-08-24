@@ -1,4 +1,4 @@
-/* ---- Layout ---- */
+/* Presentation */
 .container { 
   max-width: 1200px; 
   margin: 0 auto; 
@@ -9,7 +9,7 @@
   margin-bottom: 1rem;
 }
 
-/* Topbar: student number left, title center */
+/* Header */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -27,7 +27,7 @@
   flex: 1;
 }
 
-/* ---- Navigation ---- */
+/* Navigation */
 .tabnav {
   display: flex;
   flex-wrap: wrap;
@@ -54,7 +54,7 @@
 
 .tabnav .spacer { flex: 1; }
 
-/* ---- Hamburger ---- */
+/* Hamburger */
 .hamburger {
   width: 30px;
   height: 22px;
@@ -75,7 +75,6 @@
 .hamburger .l2 { top: 9px; }
 .hamburger .l3 { top: 18px; }
 
-/* Burger animation into "X" */
 .hamburger.open .l1 {
   top: 9px;
   transform: rotate(45deg);
@@ -88,7 +87,6 @@
   transform: rotate(-45deg);
 }
 
-/* ---- Mobile menu ---- */
 .mobileMenu {
   display: none;
   flex-direction: column;
@@ -103,7 +101,7 @@
 
 .mobileMenu.show {
   display: flex;
-  max-height: 500px; /* enough to reveal links */
+  max-height: 500px; 
   opacity: 1;
 }
 
@@ -116,15 +114,11 @@
   font-weight: 600;
 }
 
-/* ---- Responsive ---- */
 @media (max-width: 860px) {
-  /* Keep desktop links visible */
   .tabnav a { display: inline-block; }
-  /* Mobile menu appears below when burger clicked */
   .mobileMenu { display: flex; }
 }
 
-/* ---- Main ---- */
 .main {
   min-height: 70vh;
   margin-top: 1rem;
@@ -136,7 +130,7 @@ section.card {
   background: var(--bg-color, #fff);
 }
 
-/* ---- TabsBuilder ---- */
+/* Tabsbuilder */
 .tb-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1.5fr;
@@ -173,7 +167,7 @@ section.card {
   resize: vertical;
 }
 
-/* ---- Footer ---- */
+/*Footer */
 footer {
   border-top: 2px solid currentColor;
   padding: 1rem 0;
@@ -182,7 +176,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ---- Themes ---- */
+/*Themes*/
 html[data-theme="light"] {
   background-color: #ffffff;
   color: #000000;
@@ -196,7 +190,7 @@ html[data-theme="light"] .tabnav a {
   color: #000000;
 }
 html[data-theme="light"] .tabnav a.active {
-  background-color: #000000; /* black highlight */
+  background-color: #000000; 
   color: #ffffff;
 }
 

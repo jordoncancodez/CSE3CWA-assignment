@@ -8,20 +8,19 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState("light");
 
-  // apply theme to <html>
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
     <header className="header">
-      {/* Top bar with student + title */}
+      {/*  student / title */}
       <div className="topbar">
         <div className="student">21489152</div>
         <div className="title">CSE3CWA Assignment 1</div>
       </div>
 
-      {/* Desktop navigation */}
+      {/* nnavigation */}
       <nav className="tabnav">
         <Link href="/" className={pathname === "/" ? "active" : ""}>
           Tabs
@@ -53,7 +52,7 @@ export default function Header() {
 
         <div className="spacer" />
 
-        {/* Theme Selector */}
+        {/* Theme  */}
         <select
           value={theme}
           onChange={(e) => setTheme(e.target.value)}
@@ -66,7 +65,7 @@ export default function Header() {
           <option value="purple">Purple</option>
         </select>
 
-        {/* Burger Icon */}
+        {/* Burger  */}
         <button
           className={`hamburger ${menuOpen ? "open" : ""}`}
           aria-expanded={menuOpen}
@@ -79,7 +78,7 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile  */}
       <div className={`mobileMenu ${menuOpen ? "show" : ""}`}>
         <Link href="/" onClick={() => setMenuOpen(false)}>
           Tabs

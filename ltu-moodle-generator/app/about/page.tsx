@@ -1,7 +1,7 @@
 export default function AboutPage() {
     return (
       <section className="card about-card">
-        {/* Project Title */}
+        {/* Project  */}
         <h1>About This Project</h1>
         <p>
           This assignment supports{" "}
@@ -9,7 +9,7 @@ export default function AboutPage() {
           demonstrating the use of Next.js, CSS and React for building a responsive and accessible web dev tool.
         </p>
   
-        {/* Features Section */}
+        {/* Features */}
         <div className="bordered-section">
           <h2>Features</h2>
           <ul>
@@ -21,7 +21,7 @@ export default function AboutPage() {
           </ul>
         </div>
   
-        {/* Purpose Section */}
+        {/* Purpose */}
         <div className="bordered-section">
           <h2>Purpose</h2>
           <p>
@@ -30,7 +30,7 @@ export default function AboutPage() {
           </p>
         </div>
   
-        {/* Video Placeholder Under Purpose */}
+        {/* Video Placeholder */}
         <div className="video-placeholder">
           <p>Video Placeholder — How to Use the Website</p>
         </div>
