@@ -1,22 +1,40 @@
-import React from "react";
-
-export default function About() {
-  return (
-    <section className="card">
-      <h1>About</h1>
-      <p><strong>Name:</strong> Jordon Turiello</p>
-      <p><strong>Student Number:</strong> 21489152 </p>
-      <h2>How to use this website</h2>
-      <ol>
-        <li>Go to <em>Tabs Builder</em>.</li>
-        <li>Add/rename tabs (up to 15), write content.</li>
-        <li>Click <em>Generate Output</em> → Copy the HTML.</li>
-        <li>Paste into a blank file (e.g., <code>Hello.html</code>) and open it.</li>
-      </ol>
-      <video controls width={720} aria-label="Demo video">
-        <source src="" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </section>
-  );
-}
+export default function AboutPage() {
+    return (
+      <section className="card about-card">
+        {/* Project Title */}
+        <h1>About This Project</h1>
+        <p>
+          This assignment supports{" "}
+          <strong>CSE3CWA Assignment 1</strong>.  
+          demonstrating the use of Next.js, CSS and React for building a responsive and accessible web dev tool.
+        </p>
+  
+        {/* Features Section */}
+        <div className="bordered-section">
+          <h2>Features</h2>
+          <ul>
+          <li>Tabs Builder is the main homepage</li>
+          <li>Themes (Light, Dark, Blue, Green, Purple)</li>
+            <li>Responsive and modern design with mobile-friendly navigation</li>
+            <li>Interactive game pages like Court Room, Coding Race, and Escape Room, coming soon</li>
+            <li>Accessibility friendly layout</li>
+          </ul>
+        </div>
+  
+        {/* Purpose Section */}
+        <div className="bordered-section">
+          <h2>Purpose</h2>
+          <p>
+            The project shows modern web development practices,
+            focusing on user experience, accessibility, and responsiveness.
+          </p>
+        </div>
+  
+        {/* Video Placeholder Under Purpose */}
+        <div className="video-placeholder">
+          <p>Video Placeholder — How to Use the Website</p>
+        </div>
+      </section>
+    );
+  }
+  

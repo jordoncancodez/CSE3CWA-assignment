@@ -1,5 +1,5 @@
 import TabsBuilder from "@/components/TabsBuilder";
 
-export default function Page() {
+export default function HomePage() {
   return <TabsBuilder />;
 }

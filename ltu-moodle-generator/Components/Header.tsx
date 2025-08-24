@@ -8,27 +8,22 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState("light");
 
+  // apply theme to <html>
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
     <header className="header">
-      {/* Topbar */}
+      {/* Top bar with student + title */}
       <div className="topbar">
         <div className="student">21489152</div>
         <div className="title">CSE3CWA Assignment 1</div>
       </div>
 
-      {/* Nav */}
-      <nav className={`tabnav ${menuOpen ? "open" : ""}`}>
-        {/* Tabs is now the homepage */}
-        <Link
-          href="/"
-          className={
-            pathname === "/" || pathname === "/tabs-builder" ? "active" : ""
-          }
-        >
+      {/* Desktop navigation */}
+      <nav className="tabnav">
+        <Link href="/" className={pathname === "/" ? "active" : ""}>
           Tabs
         </Link>
         <Link
@@ -73,8 +68,9 @@ export default function Header() {
 
         {/* Burger Icon */}
         <button
-          className="hamburger"
+          className={`hamburger ${menuOpen ? "open" : ""}`}
           aria-expanded={menuOpen}
+          aria-label="Toggle menu"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <span className="line l1" />
@@ -83,16 +79,24 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="mobileMenu">
-          <Link href="/" onClick={() => setMenuOpen(false)}>Tabs</Link>
-          <Link href="/court-room" onClick={() => setMenuOpen(false)}>Court Room</Link>
-          <Link href="/coding-races" onClick={() => setMenuOpen(false)}>Coding Race</Link>
-          <Link href="/escape-room" onClick={() => setMenuOpen(false)}>Escape Room</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
-        </div>
-      )}
+      {/* Mobile dropdown menu */}
+      <div className={`mobileMenu ${menuOpen ? "show" : ""}`}>
+        <Link href="/" onClick={() => setMenuOpen(false)}>
+          Tabs
+        </Link>
+        <Link href="/court-room" onClick={() => setMenuOpen(false)}>
+          Court Room
+        </Link>
+        <Link href="/coding-races" onClick={() => setMenuOpen(false)}>
+          Coding Race
+        </Link>
+        <Link href="/escape-room" onClick={() => setMenuOpen(false)}>
+          Escape Room
+        </Link>
+        <Link href="/about" onClick={() => setMenuOpen(false)}>
+          About
+        </Link>
+      </div>
     </header>
   );
 }
